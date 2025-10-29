@@ -5,10 +5,10 @@ import java.util.Random;
 */
 public class Divide extends Binop {
     public double eval(double[] data) {
-        double denom = rChild.eval(data);
+        double denom = right.eval(data);
         if (Math.abs(denom) < 0.0001)
             return 1.0; 
-        return lChild.eval(data) / denom;
+        return left.eval(data) / denom;
     }
     public String toString() { return "/"; }
 }
