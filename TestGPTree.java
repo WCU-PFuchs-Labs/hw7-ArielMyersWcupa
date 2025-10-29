@@ -21,7 +21,7 @@ public class TestGPTree {
 
         treeA.crossover(treeB, rand);
 
-        System.out.println("/n--- After result of Crossover ---");
+        System.out.println("/n--- Results After crossover ---");
         System.out.println("Tree A: " + treeA + " = " + treeA.eval(inputs));
         System.out.println("Tree B: " + treeB + " = " + treeB.eval(inputs));
     }
