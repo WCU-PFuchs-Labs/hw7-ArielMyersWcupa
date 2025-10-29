@@ -34,7 +34,7 @@ public class Node implements Cloneable {
             right.depth = depth + 1;
             return;
         }
-        
+
         int total = nf.getNumOps() + nf.getNumIndepVars();
         int r = rand.nextInt(total + 1);
 
@@ -47,37 +47,28 @@ public class Node implements Cloneable {
         right.depth = depth + 1;
         right.addRandomKids(nf, maxDepth, rand);
     }
-        public double eval(double[] values) {
-        
-        if (left == null && right == null) {
-            return operation.eval(values);
-        }
 
+
+    public double eval(double[] values) {
         if (operation instanceof Unop) {
             return ((Unop) operation).eval(values);
         }
-
         double leftVal = left.eval(values);
         double rightVal = right.eval(values);
         return ((Binop) operation).eval(leftVal, rightVal);
     }
 
-    public String toString() {
-        
-        if (left == null && right == null) {
-            return operation.toString();
+        public String toString() {
+            if (operation instanceof Unop) {
+                return operation.toString();
+            }
+
+            String leftStr = left.toString();
+            String rightStr = right.toString();
+            return leftStr + " " + operation.toString() + " " + rightStr;
         }
 
-        if (operation instanceof Unop) {
-            return operation.toString();
-        }
-
-        String leftStr = left.toString();
-        String rightStr = right.toString();
-        return leftStr + " " + operation.toString() + " " + rightStr;
-    }
-
-    
+    //Object clone//
     public Object clone() {
         Object o = null;
         try {
@@ -85,17 +76,21 @@ public class Node implements Cloneable {
         } catch (CloneNotSupportedException e) {
             System.out.println("Clone not supported in Node.");
         }
-
         Node b = (Node) o;
 
-        if (left != null) b.left = (Node) left.clone();
-        if (right != null) b.right = (Node) right.clone();
-        if (operation != null) b.operation = (Op) operation.clone();
-
+        if (left != null) {
+            b.left = (Node) left.clone();
+        }
+        if (right != null) {
+            b.right = (Node) right.clone();
+        }
+        if (operation != null) {
+            b.operation = (Op) operation.clone();
+        }
         return b;
     }
-
     public void traverse(Collector c) {
+        if (c == null) return;
         c.collect(this);
         if (left != null) left.traverse(c);
         if (right != null) right.traverse(c);
