@@ -47,3 +47,75 @@ public class Node implements Cloneable {
         right.depth = depth + 1;
         right.addRandomKids(nf, maxDepth, rand);
     }
+        public double eval(double[] values) {
+        
+        if (left == null && right == null) {
+            return operation.eval(values);
+        }
+
+        if (operation instanceof Unop) {
+            return ((Unop) operation).eval(values);
+        }
+
+        double leftVal = left.eval(values);
+        double rightVal = right.eval(values);
+        return ((Binop) operation).eval(leftVal, rightVal);
+    }
+
+    public String toString() {
+        
+        if (left == null && right == null) {
+            return operation.toString();
+        }
+
+        if (operation instanceof Unop) {
+            return operation.toString();
+        }
+
+        String leftStr = left.toString();
+        String rightStr = right.toString();
+        return leftStr + " " + operation.toString() + " " + rightStr;
+    }
+
+    
+    public Object clone() {
+        Object o = null;
+        try {
+            o = super.clone();
+        } catch (CloneNotSupportedException e) {
+            System.out.println("Clone not supported in Node.");
+        }
+
+        Node b = (Node) o;
+
+        if (left != null) b.left = (Node) left.clone();
+        if (right != null) b.right = (Node) right.clone();
+        if (operation != null) b.operation = (Op) operation.clone();
+
+        return b;
+    }
+
+    public void traverse(Collector c) {
+        c.collect(this);
+        if (left != null) left.traverse(c);
+        if (right != null) right.traverse(c);
+    }
+
+    public boolean isLeaf() {
+        return (left == null && right == null);
+    }
+
+    public void swapLeft(Node trunk) {
+        if (trunk == null) return;
+        Node temp = this.left;
+        this.left = trunk.left;
+        trunk.left = temp;
+    }
+
+    public void swapRight(Node trunk) {
+        if (trunk == null) return;
+        Node temp = this.right;
+        this.right = trunk.right;
+        trunk.right = temp;
+    }
+}
