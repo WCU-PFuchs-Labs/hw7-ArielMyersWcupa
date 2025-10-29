@@ -3,5 +3,5 @@
 */
 
 public interface Collector {
-    void collect(Node node);
+    void collect(Node n);
 }
