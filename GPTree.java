@@ -16,9 +16,11 @@ public class GPTree implements Collector {
       root.addRandomKids(nf, maxDepth, rand);
   }
 
-  public void collect(Node n) {
-      if (!n.isLeaf()) crossNodes.add(n); //Only collect nodes that are specifically NOT leaves//
-    }
+  public void collect(Node node) {
+      if (node.getOp() instanceof Binop) { //Only collect nodes that are specifically NOT leaves//
+        crossNodes.add(node);
+      }
+  } 
 
     
   public void traverse() {
