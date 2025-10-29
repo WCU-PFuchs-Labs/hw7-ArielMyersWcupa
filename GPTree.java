@@ -15,14 +15,11 @@ public class GPTree implements Collector {
       root = nf.getOperator(rand);
       root.addRandomKids(nf, maxDepth, rand);
   }
-    
-  @Override
   public void collect(Node node) {
-      if (node.getOp() instanceof Binop) { //Only collect nodes that are specifically NOT leaves//
-           crossNodes.add(node);
-        }
-  } 
-
+    if (node.getOp() instanceof Binop) {
+        crossNodes.add(node);
+    }
+  }
     
   public void traverse() {
       crossNodes = new ArrayList<>(); //To create a list and traverse it//
