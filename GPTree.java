@@ -13,7 +13,7 @@ public class GPTree implements Collector {
 
   public GPTree(NodeFactory nf, int maxDepth, Random rand) { //For the constructor to build a tree randomly//
       root = nf.getOperator(rand);
-      root.addRandomKids(nf, maxDepth, Random rand) {
+      root.addRandomKids(nf, maxDepth, Random rand);
   }
 
   public void collect(Node n) {
