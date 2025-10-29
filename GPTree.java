@@ -15,11 +15,12 @@ public class GPTree implements Collector {
       root = nf.getOperator(rand);
       root.addRandomKids(nf, maxDepth, rand);
   }
-
+    
+  @Override
   public void collect(Node node) {
       if (node.getOp() instanceof Binop) { //Only collect nodes that are specifically NOT leaves//
-        crossNodes.add(node);
-      }
+           crossNodes.add(node);
+        }
   } 
 
     
@@ -33,7 +34,7 @@ public class GPTree implements Collector {
       StringJoiner sj = new StringJoiner(";");
       for (Node n : crossNodes) sj.add(n.toString()); //String of nodes that are separated by semicolons//
       return sj.toString();
-    }
+  }
 
     
   public void crossover(GPTree other, Random rand) { //This is to swap random subtrees within the GPTrees//
@@ -45,13 +46,13 @@ public class GPTree implements Collector {
 
         if (rand.nextBoolean()) n1.swapLeft(n2);
         else n1.swapRight(n2);
-    }
+  }
 
   public String toString() {
       return root.toString();
-    }
+  }
 
   public double eval(double[] data) {
       return root.eval(data);
-    }
+  }
 }
