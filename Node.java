@@ -89,4 +89,28 @@ public class Node implements Cloneable {
         }
         return b;
     }
+    public void traverse(Collector c) {
+        if (c == null) return;
+        c.collect(this);
+        if (left != null) left.traverse(c);
+        if (right != null) right.traverse(c);
+    }
+
+    public boolean isLeaf() {
+        return (left == null && right == null);
+    }
+
+    public void swapLeft(Node trunk) {
+        if (trunk == null) return;
+        Node temp = this.left;
+        this.left = trunk.left;
+        trunk.left = temp;
+    }
+
+    public void swapRight(Node trunk) {
+        if (trunk == null) return;
+        Node temp = this.right;
+        this.right = trunk.right;
+        trunk.right = temp;
+    }
 }
