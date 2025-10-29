@@ -34,7 +34,7 @@ public class Node implements Cloneable {
             right.depth = depth + 1;
             return;
         }
-
+        
         int total = nf.getNumOps() + nf.getNumIndepVars();
         int r = rand.nextInt(total + 1);
 
