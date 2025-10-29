@@ -97,7 +97,7 @@ public class Node implements Cloneable {
     }
 
     public boolean isLeaf() {
-        return (left == null && right == null);
+        return (left==null && right==null);
     }
 
     public void swapLeft(Node trunk) {
