@@ -15,7 +15,7 @@ public class GPTree implements Collector {
       root = nf.getOperator(rand);
       root.addRandomKids(nf, maxDepth, rand);
   }
-  public void collect(Node node) {
+  public void collect(Node n) {
     if (node.getOp() instanceof Binop) {
         crossNodes.add(node);
     }
